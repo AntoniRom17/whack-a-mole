@@ -4,7 +4,7 @@ const GameContext = createContext();
 
 export function GameProvider({ children }) {
   const [screen, setScreen] = useState("welcome"); // "welcome" or "game"
-  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
   const [moleIndex, setMoleIndex] = useState(() => Math.floor(Math.random() * 9));
 
   function startGame() {
@@ -14,8 +14,9 @@ export function GameProvider({ children }) {
   }
 
   function restartGame() {
-    setScreen("welcome");
-  }
+  setHighScore(prev => Math.max(prev, score));
+  setScreen("welcome");
+}
 
 function whackMole() {
   setScore(prev => prev + 1);

@@ -17,13 +17,16 @@ export function GameProvider({ children }) {
     setScreen("welcome");
   }
 
-  function whackMole() {
-    setScore(prev => prev + 1);
+function whackMole() {
+  setScore(prev => prev + 1);
 
-    // pick a new random hole
-    const newIndex = Math.floor(Math.random() * 9);
-    setMoleIndex(newIndex);
+  let newIndex = moleIndex;
+  while (newIndex === moleIndex) {
+    newIndex = Math.floor(Math.random() * 9);
   }
+
+  setMoleIndex(newIndex);
+}
 
   return (
     <GameContext.Provider value={{ screen, score, moleIndex, startGame, restartGame, whackMole }}>
